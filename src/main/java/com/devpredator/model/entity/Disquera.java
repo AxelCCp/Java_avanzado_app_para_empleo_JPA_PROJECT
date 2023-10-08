@@ -9,15 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name="disquera")
 public class Disquera {
 	
 	
-	public int getIdDisquera() {
+	public Long getIdDisquera() {
 		return idDisquera;
 	}
-	public void setIdDisquera(int idDisquera) {
+	public void setIdDisquera(Long idDisquera) {
 		this.idDisquera = idDisquera;
 	}
 	public String getDescripcion() {
@@ -48,7 +49,7 @@ public class Disquera {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idDisquera")
-	private int idDisquera;
+	private Long idDisquera;
 	
 	@Column(name="descripcion", length = 100)
 	private String descripcion;
