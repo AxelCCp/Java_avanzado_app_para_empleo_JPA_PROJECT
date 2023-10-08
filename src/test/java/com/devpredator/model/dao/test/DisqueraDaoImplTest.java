@@ -5,7 +5,19 @@ package com.devpredator.model.dao.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
+import com.devpredator.model.dao.DisqueraDao;
+import com.devpredator.model.dao.DisqueraDaoImpl;
+import com.devpredator.model.entity.Disquera;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.Persistence;
 
 /**
  * 
@@ -17,7 +29,12 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testGuardar() {
-		fail("Not yet implemented");
+		
+		Disquera disquera = new Disquera();
+		disquera.setDescripcion("Zzz' zz");
+		disquera.setFechaCreacion(LocalDateTime.now());
+		disquera.setEstatus(true);
+		this.disqueraDao.guardar(disquera);
 	}
 
 	/**
@@ -25,7 +42,9 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testActualizar() {
-		fail("Not yet implemented");
+		Disquera disqueraConsultada = this.disqueraDao.consultarPorId(9L);
+		disqueraConsultada.setDescripcion("Disquera IronMaiden");
+		this.disqueraDao.actualizar(disqueraConsultada);
 	}
 
 	/**
@@ -33,7 +52,8 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testEliminar() {
-		fail("Not yet implemented");
+		Long id = 9L;
+		this.disqueraDao.eliminar(id);
 	}
 
 	/**
@@ -41,7 +61,11 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testConsultar() {
-		fail("Not yet implemented");
+		List<Disquera>disqueras = this.disqueraDao.consultar();
+		assertTrue(disqueras.size() > 0);
+		disqueras.forEach(d -> {
+			System.out.println(d.getDescripcion());
+		});
 	}
 
 	/**
@@ -49,7 +73,13 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testConsultarPorId() {
-		fail("Not yet implemented");
+		Disquera disquera =  disqueraDao.consultarPorId(10L);
+		System.out.println("Disquera: " + disquera.getDescripcion());
 	}
 
+	
+	DisqueraDao disqueraDao = new DisqueraDaoImpl();
+	
+	
+	
 }
