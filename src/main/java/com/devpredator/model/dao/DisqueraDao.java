@@ -16,4 +16,8 @@ public interface DisqueraDao {
 
 	Disquera consultarPorId(Long id);
 	
+	Disquera consultarByDescripcionJPQL(String descripcion);
+	
+	Disquera consultarByDescripcionNative(String descripcion);
+	
 }

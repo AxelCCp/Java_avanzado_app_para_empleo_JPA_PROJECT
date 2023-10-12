@@ -94,6 +94,28 @@ public class DisqueraDaoImpl implements DisqueraDao{
 		return disqueraConsultado;
 	}
 
+
+	//genera la consulta usanso JPQL
+	@Override
+	public Disquera consultarByDescripcionJPQL(String descripcion) {
+		// TODO Auto-generated method stub
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		TypedQuery<Disquera> queryDisquera =  (TypedQuery<Disquera>) em.createQuery("from Disquera where descripcion =:desc ");
+		queryDisquera.setParameter("desc", descripcion);
+		return queryDisquera.getSingleResult();
+	}
+	
+	//genera la consulta usando sql nativo
+	@Override
+	public Disquera consultarByDescripcionNative(String descripcion) {
+		// TODO Auto-generated method stub
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		//TypedQuery<Disquera> queryDisquera =  (TypedQuery<Disquera>) em.createNativeQuery("select * from disquera where descripcion =:desc", Disquera.class);
+		TypedQuery<Disquera> queryDisquera =  (TypedQuery<Disquera>) em.createNativeQuery("select * from disquera where descripcion = ?", Disquera.class);
+		queryDisquera.setParameter(1, descripcion);
+		return queryDisquera.getSingleResult();
+	}
 	
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("persistenceDevPredator");
+
 }

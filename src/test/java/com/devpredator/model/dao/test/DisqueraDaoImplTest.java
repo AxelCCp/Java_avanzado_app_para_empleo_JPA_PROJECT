@@ -73,8 +73,34 @@ class DisqueraDaoImplTest {
 	 */
 	@Test
 	void testConsultarPorId() {
+		
 		Disquera disquera =  disqueraDao.consultarPorId(10L);
+		
+		assertNotNull(disquera);
+		
 		System.out.println("Disquera: " + disquera.getDescripcion());
+	}
+	
+	
+	@Test
+	void testConsultarByDescripcionJPQL() {
+		
+		Disquera disqueraConsultada = this.disqueraDao.consultarByDescripcionJPQL("Zzz' zz");
+		
+		assertNotNull(disqueraConsultada);
+		
+		System.out.println("disquera: " + disqueraConsultada);
+	}
+	
+	
+	@Test
+	void testConsultarByDescripcionNative() {
+		
+		Disquera disqueraConsultada = this.disqueraDao.consultarByDescripcionNative("MegaForce");
+		
+		assertNotNull(disqueraConsultada);
+		
+		System.out.println("disquera: " + disqueraConsultada);
 	}
 
 	
