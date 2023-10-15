@@ -2,6 +2,9 @@ package com.devpredator.model.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -75,6 +78,7 @@ public class SubGenero {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idGenero")
+	@Cascade(CascadeType.REMOVE)
 	private Genero genero;
 	
 	@Column(name="fechaCreacion")
